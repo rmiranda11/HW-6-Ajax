@@ -6,7 +6,6 @@ var arrHero = ['Mr.Incredible', 'Spiderman', 'Batman', 'Ironman','Green Ranger']
 function displayGif() {
     var hero = $(this).attr("data-name");
 
-   // arrHero.push(hero);
 
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
         hero + "&api_key=dc6zaTOxFJmzC&limit=3";
@@ -35,7 +34,7 @@ function displayGif() {
             heroImage.addClass("gif")
             heroImage.attr("data-animate", results[i].images.fixed_height.url)
             heroImage.attr("data-still", results[i].images.fixed_height.url)
-            heroImage.attr("data-state", "still")
+            heroImage.attr("data-state","still",results[i].images.fixed_height.url)
 
             
             $(".gif").on("click", function() {
@@ -62,7 +61,6 @@ function displayGif() {
 
           });
 
-  // renderButtons();
 };
 
 //-------------function to handle array--------------------
