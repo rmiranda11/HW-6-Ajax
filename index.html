@@ -53,7 +53,9 @@ function displayGif() {
 
             var heroImage = $("<img>");
             heroImage.attr("src", results[i].images.fixed_height.url);
-            heroImage.addClass("gif")
+  
+  //Could not get jifs to pause and play again. I tried a few different ways with my attempt below commented out. 
+            /*         heroImage.addClass("gif")
             heroImage.attr("data-animate", results[i].images.fixed_height.url)
             heroImage.attr("data-still", results[i].images.fixed_height.url)
             heroImage.attr("data-state","still",results[i].images.fixed_height.url)
@@ -72,7 +74,7 @@ function displayGif() {
                 $(this).attr("data-state", "still");
                 }
                 
-                });
+                }); */
 
             
             gifDiv.prepend(p);
