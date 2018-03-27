@@ -1,5 +1,5 @@
 //-------------Global-----------------
-var arrHero = ['Mr.Incredible', 'Spiderman', 'Batman', 'Ironman'];
+var arrHero = ['Mr.Incredible', 'Spiderman', 'Batman', 'Ironman','Green Ranger'];
 
 //--------------Ajax-----------------
 
@@ -9,7 +9,7 @@ function displayGif() {
    // arrHero.push(hero);
 
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        hero + "&api_key=dc6zaTOxFJmzC&limit=5";
+        hero + "&api_key=dc6zaTOxFJmzC&limit=3";
 
 
         $.ajax({
@@ -32,7 +32,28 @@ function displayGif() {
 
             var heroImage = $("<img>");
             heroImage.attr("src", results[i].images.fixed_height.url);
+            heroImage.addClass("gif")
+            heroImage.attr("data-animate", results[i].images.fixed_height.url)
+            heroImage.attr("data-still", results[i].images.fixed_height.url)
+            heroImage.attr("data-state", "still")
 
+            
+            $(".gif").on("click", function() {
+   
+                var state = $(this).attr("data-state");
+                console.log(state);
+                
+                if(state === "still"){
+                $(this).attr("src", $(this).attr("data-animate"));
+                $(this).attr("data-state", "animate");
+                } else {
+                $(this).attr("src", $(this).attr("data-still"));
+                $(this).attr("data-state", "still");
+                }
+                
+                });
+
+            
             gifDiv.prepend(p);
             gifDiv.prepend(heroImage);
   
@@ -40,9 +61,6 @@ function displayGif() {
             }
 
           });
-   // console.log(hero);
-    //console.log(arrHero);
-    //console.log(queryURL);
 
   // renderButtons();
 };
@@ -53,13 +71,9 @@ function renderButtons() {
 
     for (var i = 0; i < arrHero.length; i++) {
         var a = $("<button>");
-        // Adding a class of movie-btn to our button
         a.addClass("hero-btn");
-        // Adding a data-attribute
         a.attr("data-name", arrHero[i]);
-        // Providing the initial button text
         a.text(arrHero[i]);
-        // Adding the button to the buttons-view div
         $("#giphyButtons").append(a);
         }
 }
@@ -73,6 +87,8 @@ $("#addSuper").on("click", function(event) {
 
     renderButtons();
 });
+
+
 
 $(document).on("click", ".hero-btn", displayGif);
 
